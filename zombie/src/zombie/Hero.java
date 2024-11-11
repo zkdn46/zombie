@@ -43,7 +43,7 @@ public class Hero extends Unit {
 		} else {
 			hp += 100;
 			potion--;
-			String msg = String.format("플레이어 체력 회복, 현재 Hero 체력: %d", hp);
+			String msg = String.format("Hero 체력 회복, 현재 Hero 체력: %d", hp);
 			System.out.println(msg);
 		}
 	}

@@ -37,4 +37,15 @@ public class Hero extends Unit {
 
 	}
 
+	protected void recovery() {
+		if (potion < 1) {
+			System.out.println("남은 포션이 없습니다.");
+		} else {
+			hp += 100;
+			potion--;
+			String msg = String.format("플레이어 체력 회복, 현재 Hero 체력: %d", hp);
+			System.out.println(msg);
+		}
+	}
+
 }

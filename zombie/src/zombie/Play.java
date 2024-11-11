@@ -1,5 +1,6 @@
 package zombie;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Play {
@@ -11,19 +12,22 @@ public class Play {
 	private Boss boss;
 	private Zombie zombie;
 	private boolean isRun = true;
+	private ArrayList<Unit> monsters = new ArrayList<Unit>();
+
+	Unit target;
 
 	public void run() {
 		set();
 		while (isRun) {
 			play();
-			end();
+			
 		}
 	}
 
 	private void set() {
-		zombie = new Zombie(5, 10, 100);
-		boss = new Boss(9, 20, 300, 100);
 		hero = new Hero(1, 20, 200, 2);
+		monsters.add(zombie = new Zombie(5, 10, 100));
+		monsters.add(boss = new Boss(9, 20, 300, 100));
 	}
 
 	private void play() {
@@ -36,9 +40,34 @@ public class Play {
 		}
 
 		if (sel == MOVE) {
-
+			move();
 		} else if (sel == EXIT) {
 			exit();
+		}
+	}
+
+	private void move() {
+		hero.pos++;
+
+		target = encounter(hero.pos);
+		if (target != hero) {
+			battle();
+		}
+	}
+
+	private Unit encounter(int pos) {
+		for (int i = 0; i < monsters.size(); i++) {
+			if (monsters.get(i).pos == pos) {
+				return monsters.get(i);
+			}
+		}
+		return hero;
+	}
+
+	private void battle() {
+		while (target.hp == 0) {
+			hero.attack(target);
+			end();
 		}
 	}
 

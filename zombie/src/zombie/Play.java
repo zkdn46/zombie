@@ -24,6 +24,10 @@ public class Play {
 	}
 
 	private void end() {
-
+		if (boss.hp == 0) {
+			System.out.println("보스 사망, Clear~");
+		} else if (hero.hp == 0) {
+			System.out.println("Hero 사망, 패배~");
+		}
 	}
 }

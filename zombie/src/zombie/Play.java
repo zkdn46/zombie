@@ -30,4 +30,21 @@ public class Play {
 			System.out.println("Hero 사망, 패배~");
 		}
 	}
+
+	private int input(String msg) {
+		System.out.println(msg + ": ");
+
+		String sel = "";
+		int number = -1;
+
+		try {
+			sel = sc.nextLine();
+			number = Integer.parseInt(sel);
+			return number;
+		} catch (Exception e) {
+			System.err.println("숫자 입력!");
+			return number;
+		}
+
+	}
 }

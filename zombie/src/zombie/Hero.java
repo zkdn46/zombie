@@ -14,16 +14,16 @@ public class Hero extends Unit {
 		int damage = ran.nextInt(maxDamage) + 1;
 
 		if (enenmy instanceof Boss) {
-			if (((Boss) enenmy).shield != 0) {
+			if (((Boss) enenmy).shield != EMPTY) {
 				((Boss) enenmy).shield -= damage;
-				if (((Boss) enenmy).shield <= 0) {
-					((Boss) enenmy).shield = 0;
+				if (((Boss) enenmy).shield <= EMPTY) {
+					((Boss) enenmy).shield = EMPTY;
 					System.out.println("보스 실드 파괴!");
 				}
 			} else {
 				enenmy.hp -= damage;
-				if (enenmy.hp < 0) {
-					enenmy.hp = 0;
+				if (enenmy.hp < EMPTY) {
+					enenmy.hp = EMPTY;
 				}
 			}
 			String msg = String.format("보스에게 %d의 피해 입힘, 현재 보스 체력: %d / 실드: %d", damage, enenmy.hp,
@@ -38,7 +38,7 @@ public class Hero extends Unit {
 	}
 
 	protected void recovery() {
-		if (potion < 1) {
+		if (potion == EMPTY) {
 			System.out.println("남은 포션이 없습니다.");
 		} else {
 			hp += 100;

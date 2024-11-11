@@ -12,7 +12,6 @@ public class Play {
 	public void run() {
 		set();
 		while (isRun) {
-			printMenu();
 			play();
 			end();
 		}
@@ -24,9 +23,11 @@ public class Play {
 		hero = new Hero(1, 20, 200, 2);
 	}
 
-	private void printMenu() {
+	private void play() {
 		System.out.println("현재 위치: " + hero.pos);
-		System.out.println("앞으로 이동(1), 종료(2)");
+		int sel = input("앞으로 이동(1), 종료(2)");
+		
+		
 	}
 
 	private void end() {

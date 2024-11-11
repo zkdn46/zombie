@@ -3,6 +3,9 @@ package zombie;
 import java.util.Scanner;
 
 public class Play {
+	private final int MOVE = 1;
+	private final int EXIT = 2;
+
 	protected Scanner sc = new Scanner(System.in);
 	private Hero hero;
 	private Boss boss;
@@ -26,8 +29,22 @@ public class Play {
 	private void play() {
 		System.out.println("현재 위치: " + hero.pos);
 		int sel = input("앞으로 이동(1), 종료(2)");
-		
-		
+
+		if (sel < MOVE || sel > EXIT) {
+			System.out.println("1 또는 2 입력!");
+			return;
+		}
+
+		if (sel == MOVE) {
+
+		} else if (sel == EXIT) {
+			exit();
+		}
+	}
+
+	private void exit() {
+		isRun = false;
+		System.out.println("게임 종료.");
 	}
 
 	private void end() {

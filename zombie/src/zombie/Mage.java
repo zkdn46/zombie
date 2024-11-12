@@ -16,14 +16,14 @@ public class Mage extends Zombie {
 		if (magic == 1 && mana >= 20) {
 			hero.hp -= damage * 3;
 			mana -= 20;
-			String msg = String.format("마법 공격! 마법사가 %d의 피해를 입힘", damage * 3);
+			String msg = String.format("마법 공격! 마법사가 %d의 피해를 입힘, ", damage * 3);
 			System.out.print(msg);
 		} else if (magic == 2 && mana <= 40) {
 			mana += 10;
-			System.out.print("마나 회복! 마법사가 10의 마나 회복");
+			System.out.print("마나 회복! 마법사가 10의 마나 회복, ");
 		} else {
 			hero.hp -= damage;
-			String msg = String.format("마법사가 %d의 피해를 입힘", damage);
+			String msg = String.format("마법사가 %d의 피해를 입힘, ", damage);
 			System.out.print(msg);
 		}
 

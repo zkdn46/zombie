@@ -1,5 +1,6 @@
 package zombie;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Play {
@@ -10,7 +11,8 @@ public class Play {
 	private final int ATTACK = 1;
 	private final int POTION = 2;
 
-	protected Scanner sc = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
+	private Random ran = new Random();
 	private Hero hero;
 	private Zombie zombie;
 	private Ghost ghost;
@@ -28,11 +30,11 @@ public class Play {
 	}
 
 	private void set() {
-		hero = new Hero(1, 20, 200, 2);
-		zombie = new Zombie(3, 10, 100);
+		hero = new Hero(1, 20, 250, 1);
+		zombie = new Zombie(3, 5, 150);
 		ghost = new Ghost(5, 10, 100);
-		mage = new Mage(7, 10, 100, 50);
-		boss = new Boss(9, 20, 300, 100);
+		mage = new Mage(7, 15, 100, 50);
+		boss = new Boss(9, 20, 200, 50);
 	}
 
 	private void play() {
@@ -79,6 +81,7 @@ public class Play {
 
 			if (zombie.hp == EMPTY) {
 				System.out.println("좀비 처치");
+				getPotion();
 				break;
 			} else if (hero.hp == EMPTY) {
 				isRun = false;
@@ -102,6 +105,7 @@ public class Play {
 
 			if (ghost.hp == EMPTY) {
 				System.out.println("유령 처치!");
+				getPotion();
 				break;
 			} else if (hero.hp == EMPTY) {
 				break;
@@ -123,6 +127,7 @@ public class Play {
 
 			if (mage.hp == EMPTY) {
 				System.out.println("마법사 처치!");
+				getPotion();
 				break;
 			} else if (hero.hp == EMPTY) {
 				break;
@@ -158,7 +163,19 @@ public class Play {
 			hero.attack(unit);
 
 		} else if (sel == POTION) {
+			if (hero.potion != EMPTY) {
+				unit.attack(hero);
+			}
 			hero.recovery();
+		}
+	}
+
+	private void getPotion() {
+		int qty = ran.nextInt(2);
+		hero.potion += qty;
+
+		if (qty == 1) {
+			System.out.println("Hero 포션 1개 획득");
 		}
 	}
 

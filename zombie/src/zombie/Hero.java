@@ -29,6 +29,18 @@ public class Hero extends Unit {
 			String msg = String.format("보스에게 %d의 피해 입힘, 현재 보스 체력: %d / 실드: %d", damage, enemy.hp,
 					((Boss) enemy).shield);
 			System.out.println(msg);
+		} else if (enemy instanceof Ghost) {
+			int dodge = ran.nextInt(4);
+			if (dodge == 4) {
+				System.out.println("공격실패! 유령이 회피했습니다.");
+			} else {
+				enemy.hp -= damage;
+				if (enemy.hp < EMPTY) {
+					enemy.hp = EMPTY;
+				}
+				String msg = String.format("유령에게 %d의 피해 입힘, 현재 유령 체력: %d", damage, enemy.hp);
+				System.out.println(msg);
+			}
 		} else {
 			enemy.hp -= damage;
 			if (enemy.hp < EMPTY) {

@@ -23,8 +23,8 @@ public class Play {
 		set();
 		while (isRun) {
 			play();
-			end();
 		}
+		end();
 	}
 
 	private void set() {
@@ -70,9 +70,12 @@ public class Play {
 			}
 
 			battle(zombie, sel);
-			end();
+			
 			if (zombie.hp == EMPTY) {
 				System.out.println("좀비 처치");
+				break;
+			} else if (hero.hp == EMPTY) {
+				isRun = false;
 				break;
 			}
 		}

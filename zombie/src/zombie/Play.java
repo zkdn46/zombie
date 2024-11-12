@@ -70,7 +70,7 @@ public class Play {
 			}
 
 			battle(zombie, sel);
-			
+
 			if (zombie.hp == EMPTY) {
 				System.out.println("좀비 처치");
 				break;
@@ -80,6 +80,28 @@ public class Play {
 			}
 		}
 
+	}
+
+	private void bossBattle() {
+		System.out.println("보스를 만났다!");
+		while (true) {
+			int sel = input("공격(1), 포션마시기(2)");
+
+			if (sel < ATTACK || sel > POTION) {
+				System.out.println("1 또는 2 입력!");
+				continue;
+			}
+
+			battle(boss, sel);
+
+			if (boss.hp == EMPTY) {
+				isRun = false;
+				break;
+			} else if (hero.hp == EMPTY) {
+				isRun = false;
+				break;
+			}
+		}
 	}
 
 	void battle(Unit unit, int sel) {
@@ -92,10 +114,6 @@ public class Play {
 		}
 	}
 
-	private void bossBattle() {
-
-	}
-
 	private void exit() {
 		isRun = false;
 		System.out.println("게임 종료.");
@@ -104,10 +122,8 @@ public class Play {
 	private void end() {
 		if (boss.hp == EMPTY) {
 			System.out.println("보스 사망, Clear~");
-			isRun = false;
 		} else if (hero.hp == EMPTY) {
 			System.out.println("Hero 사망, 패배~");
-			isRun = false;
 		}
 	}
 

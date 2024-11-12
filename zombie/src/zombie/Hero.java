@@ -31,7 +31,7 @@ public class Hero extends Unit {
 			System.out.println(msg);
 		} else if (enemy instanceof Ghost) {
 			int dodge = ran.nextInt(4);
-			if (dodge == 4) {
+			if (dodge == EMPTY) {
 				System.out.println("공격실패! 유령이 회피했습니다.");
 			} else {
 				enemy.hp -= damage;

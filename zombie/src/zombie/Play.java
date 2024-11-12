@@ -12,9 +12,11 @@ public class Play {
 
 	protected Scanner sc = new Scanner(System.in);
 	private Hero hero;
-	private Boss boss;
 	private Zombie zombie;
 	private Ghost ghost;
+	private Mage mage;
+	private Boss boss;
+
 	private boolean isRun = true;
 
 	public void run() {
@@ -29,6 +31,7 @@ public class Play {
 		hero = new Hero(1, 20, 200, 2);
 		zombie = new Zombie(3, 10, 100);
 		ghost = new Ghost(5, 10, 100);
+		mage = new Mage(7, 10, 100, 50);
 		boss = new Boss(9, 20, 300, 100);
 	}
 
@@ -55,6 +58,8 @@ public class Play {
 			zombieBattle();
 		} else if (hero.pos == ghost.pos) {
 			ghostBattle();
+		} else if (hero.pos == mage.pos) {
+			mageBattle();
 		} else if (hero.pos == boss.pos) {
 			bossBattle();
 		}
@@ -97,6 +102,27 @@ public class Play {
 
 			if (ghost.hp == EMPTY) {
 				System.out.println("유령 처치!");
+				break;
+			} else if (hero.hp == EMPTY) {
+				break;
+			}
+		}
+	}
+
+	private void mageBattle() {
+		System.out.println("마법사를 만났다!");
+		while (true) {
+			int sel = input("공격(1), 포션마시기(2)");
+
+			if (sel < ATTACK || sel > POTION) {
+				System.out.println("1 또는 2 입력!");
+				continue;
+			}
+
+			battle(mage, sel);
+
+			if (mage.hp == EMPTY) {
+				System.out.println("마법사 처치!");
 				break;
 			} else if (hero.hp == EMPTY) {
 				break;

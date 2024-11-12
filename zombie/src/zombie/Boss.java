@@ -1,14 +1,12 @@
 package zombie;
 
-public class Boss extends Unit {
+public class Boss extends Zombie {
 	protected final int DOUBLE = 2;
 
 	protected int shield;
 
 	protected Boss(int pos, int maxDamage, int hp, int shield) {
-		super.pos = pos;
-		super.maxDamage = maxDamage;
-		super.hp = hp;
+		super(pos, maxDamage, hp);
 		this.shield = shield;
 	}
 

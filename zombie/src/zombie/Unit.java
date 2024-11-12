@@ -11,5 +11,5 @@ abstract class Unit {
 	protected int hp;
 	protected int maxDamage;
 
-	protected abstract void attack(Unit enenmy);
+	protected abstract void attack(Unit enemy);
 }

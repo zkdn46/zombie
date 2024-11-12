@@ -41,6 +41,14 @@ public class Hero extends Unit {
 				String msg = String.format("유령에게 %d의 피해 입힘, 현재 유령 체력: %d", damage, enemy.hp);
 				System.out.println(msg);
 			}
+		} else if (enemy instanceof Mage) {
+			enemy.hp -= damage;
+			if (enemy.hp < EMPTY) {
+				enemy.hp = EMPTY;
+			}
+			String msg = String.format("마법사에게 %d의 피해 입힘, 현재 마법사 체력: %d / 마나: %d", damage, enemy.hp,
+					((Mage) enemy).mana);
+			System.out.println(msg);
 		} else {
 			enemy.hp -= damage;
 			if (enemy.hp < EMPTY) {

@@ -206,6 +206,5 @@ public class Play {
 			System.err.println("숫자 입력!");
 			return number;
 		}
-
 	}
 }

@@ -11,7 +11,7 @@
 - 마지막까지 살아남아 보스까지 처치하면 클리어하는 게임
 
 > #### Class Diagram
-![클래스 다이아그램](zombie/resources/class diagram.jpg)
+![클래스 다이아그램](https://github.com/zkdn46/zombie/blob/66325b733a61a9202b6036ea10f8f703fcef28a6/zombie/resources/class%20diagram.jpg)
 
 > #### Demo
 <img src= "링크" width="400px">

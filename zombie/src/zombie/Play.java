@@ -1,33 +1,36 @@
 package zombie;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Play {
 	private final int MOVE = 1;
 	private final int EXIT = 2;
 
+	private final int ZOMBIE = 4;
+	private final int BOSS = 9;
+
+	private final int EMPTY = 0;
+	private final int ATTACK = 1;
+	private final int POTION = 2;
+
 	protected Scanner sc = new Scanner(System.in);
 	private Hero hero;
 	private Boss boss;
 	private Zombie zombie;
 	private boolean isRun = true;
-	private ArrayList<Unit> monsters = new ArrayList<Unit>();
-
-	Unit target;
 
 	public void run() {
 		set();
 		while (isRun) {
 			play();
-			
+			end();
 		}
 	}
 
 	private void set() {
 		hero = new Hero(1, 20, 200, 2);
-		monsters.add(zombie = new Zombie(5, 10, 100));
-		monsters.add(boss = new Boss(9, 20, 300, 100));
+		zombie = new Zombie(5, 10, 100);
+		boss = new Boss(9, 20, 300, 100);
 	}
 
 	private void play() {
@@ -49,26 +52,45 @@ public class Play {
 	private void move() {
 		hero.pos++;
 
-		target = encounter(hero.pos);
-		if (target != hero) {
-			battle();
+		if (hero.pos == ZOMBIE) {
+			zombieBattle();
+		} else if (hero.pos == BOSS) {
+			bossBattle();
 		}
 	}
 
-	private Unit encounter(int pos) {
-		for (int i = 0; i < monsters.size(); i++) {
-			if (monsters.get(i).pos == pos) {
-				return monsters.get(i);
+	private void zombieBattle() {
+		System.out.println("좀비를 만났다!");
+		while (true) {
+			int sel = input("공격(1), 포션마시기(2)");
+
+			if (sel < ATTACK || sel > POTION) {
+				System.out.println("1 또는 2 입력!");
+				continue;
+			}
+
+			battle(zombie, sel);
+			end();
+			if (zombie.hp == EMPTY) {
+				System.out.println("좀비 처치");
+				break;
 			}
 		}
-		return hero;
+
 	}
 
-	private void battle() {
-		while (target.hp == 0) {
-			hero.attack(target);
-			end();
+	void battle(Unit unit, int sel) {
+		if (sel == ATTACK) {
+			unit.attack(hero);
+			hero.attack(unit);
+
+		} else if (sel == POTION) {
+			hero.recovery();
 		}
+	}
+
+	private void bossBattle() {
+
 	}
 
 	private void exit() {
@@ -77,10 +99,10 @@ public class Play {
 	}
 
 	private void end() {
-		if (boss.hp == 0) {
+		if (boss.hp == EMPTY) {
 			System.out.println("보스 사망, Clear~");
 			isRun = false;
-		} else if (hero.hp == 0) {
+		} else if (hero.hp == EMPTY) {
 			System.out.println("Hero 사망, 패배~");
 			isRun = false;
 		}
